@@ -1,1 +1,28 @@
+# Ignorar dependencias de node_modules
+/node_modules/
+
+# Ignorar archivos de configuración local, como .env
 .env
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos generados por el sistema operativo (macOS, Linux, etc.)
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de bloqueo de dependencias
+package-lock.json
+
+# Ignorar carpetas de compilación o caché
+/dist/
+/build/
+/coverage/
+
+# Si usas un editor como Visual Studio Code, puedes ignorar la carpeta .vscode
+.vscode/
+
+# Otros archivos que podrían generarse en el desarrollo (opcional)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
