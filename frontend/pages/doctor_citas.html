@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas Médicas</title>
+    <link rel="stylesheet" href="../css/doctor.css">
+</head>
+<body>
+    <nav>
+        <h1>Citas Médicas</h1>
+        <ul>
+            <li><a href="doctor_dashboard.html">Inicio</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <label for="doctorId">Ingrese su ID de Doctor:</label>
+        <input type="number" id="doctorId" placeholder="Ejemplo: 1">
+        <button id="buscarCitas">Buscar Citas</button>
+    </div>
+
+    <ul id="listaCitas"></ul>
+
+    <script type="module" src="../js/doctor.js"></script>
+</body>
+</html>

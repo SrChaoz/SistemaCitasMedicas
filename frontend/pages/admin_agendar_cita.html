@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Nueva Cita</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <nav>
+        <h1>Agendar Nueva Cita</h1>
+        <ul>
+            <li><a href="admin_dashboard.html">Inicio</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <h2>Datos de la Cita</h2>
+        <form id="formNuevaCita">
+            <label for="pacienteId">ID del Paciente:</label>
+            <input type="text" id="pacienteId" required>
+        
+            <label for="doctorId">ID del Doctor:</label>
+            <input type="text" id="doctorId" required>
+        
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" required>
+        
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" required>
+        
+            <label for="estado">Estado:</label>
+            <select id="estado" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Completada">Completada</option>
+            </select>
+        
+            <button type="submit">Agendar Cita</button>
+        </form>
+        
+        
+    </div>
+
+    <script type="module" src="../js/admin.js"></script>
+
+</body>
+</html>

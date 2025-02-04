@@ -14,10 +14,10 @@ const getPacientes = async (req, res) => {
 // Crear un nuevo paciente
 const createPaciente = async (req, res) => {
   try {
-    const { nombre, apellido, telefono, email } = req.body;
+    const { nombre, apellido, telefono, direccion } = req.body; // Se agregó "direccion"
     const result = await pool.query(
-      "INSERT INTO Paciente (Nombre, Apellido, Telefono, Email) VALUES ($1, $2, $3, $4) RETURNING *",
-      [nombre, apellido, telefono, email]
+      "INSERT INTO Paciente (Nombre, Apellido, Telefono, Direccion) VALUES ($1, $2, $3, $4) RETURNING *",
+      [nombre, apellido, telefono, direccion]
     );
     res.json(result.rows[0]);
   } catch (error) {
