@@ -3,67 +3,82 @@ import { apiRequest, obtenerPacientes, obtenerCitas, agendarCita } from './app.j
 // Función para mostrar pacientes
 async function mostrarPacientes() {
     try {
-        const listaPacientes = document.getElementById('listaPacientes');
+        const pacientes = await obtenerPacientes();
+        console.log("📢 Pacientes recibidos:", pacientes);
 
-        if (!listaPacientes) {
-            console.warn("No se encontró el elemento listaPacientes. Asegúrate de estar en la página correcta.");
+        const tablaPacientes = document.getElementById('tablaPacientes').querySelector('tbody');
+
+        if (!tablaPacientes) {
+            console.warn("⚠️ No se encontró `tablaPacientes`. Verifica el HTML.");
             return;
         }
 
-        const pacientes = await obtenerPacientes();
-        listaPacientes.innerHTML = ''; // Limpiar lista antes de agregar nuevos elementos
+        tablaPacientes.innerHTML = ''; // Limpiar tabla antes de agregar nuevos elementos
 
         pacientes.forEach(paciente => {
-            listaPacientes.innerHTML += `<li>${paciente.nombre} ${paciente.apellido} - Tel: ${paciente.telefono} - Dir: ${paciente.direccion}</li>`;
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${paciente.id_paciente}</td>
+                <td>${paciente.nombre}</td>
+                <td>${paciente.apellido}</td>
+                <td>${paciente.telefono}</td>
+                <td>${paciente.direccion}</td>
+            `;
+            tablaPacientes.appendChild(row);
         });
 
+        console.log("✅ Pacientes mostrados en la tabla.");
     } catch (error) {
-        console.error("Error al obtener pacientes:", error);
+        console.error("❌ Error al obtener pacientes:", error);
     }
 }
 
-
-
-// Función para mostrar citas agendadas
+// 📌 Función para mostrar citas en una tabla
 async function mostrarCitas() {
     try {
-        const listaCitas = document.getElementById('listaCitas');
-
-        if (!listaCitas) {
-            console.warn("⚠️ No se encontró el elemento listaCitas. Asegúrate de estar en la página correcta.");
-            return;
-        }
-
         const citas = await obtenerCitas();
-        console.log("📢 Citas obtenidas del backend:", citas); // 🚀 Verificar si hay datos
+        console.log("📢 Citas recibidas:", citas);
 
-        listaCitas.innerHTML = ''; // Limpiar lista antes de agregar nuevos elementos
+        const tablaCitas = document.getElementById('tablaCitas').querySelector('tbody');
 
-        if (!Array.isArray(citas)) {
-            console.error("❌ Error: `citas` no es un array", citas);
-            listaCitas.innerHTML = '<li>Error al obtener citas.</li>';
+        if (!tablaCitas) {
+            console.warn("⚠️ No se encontró `tablaCitas`. Verifica el HTML.");
             return;
         }
 
-        if (citas.length === 0) {
-            listaCitas.innerHTML = '<li>No hay citas registradas.</li>';
-            return;
-        }
+        tablaCitas.innerHTML = ''; // Limpiar tabla antes de agregar nuevos elementos
 
         citas.forEach(cita => {
-            listaCitas.innerHTML += `
-                <li>
-                    <strong>Paciente:</strong> ${cita.paciente} - <strong>Doctor:</strong> ${cita.doctor} <br>
-                    <strong>Fecha:</strong> ${cita.fecha} - <strong>Hora:</strong> ${cita.hora} <br>
-                    <strong>Estado:</strong> ${cita.estado}
-                </li>`;
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${cita.id_cita}</td>
+                <td>${cita.paciente}</td>
+                <td>${cita.doctor}</td>
+                <td>${new Date(cita.fecha).toLocaleDateString()}</td>
+                <td>${cita.hora}</td>
+                <td>${cita.estado}</td>
+            `;
+            tablaCitas.appendChild(row);
         });
 
+        console.log("✅ Citas mostradas en la tabla.");
     } catch (error) {
         console.error("❌ Error al obtener citas:", error);
-        listaCitas.innerHTML = '<li>Error al cargar las citas.</li>';
     }
 }
+
+// 📌 Ejecutar funciones cuando cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("📢 DOM cargado, mostrando datos en tablas.");
+
+    if (document.getElementById('tablaPacientes')) {
+        mostrarPacientes();
+    }
+
+    if (document.getElementById('tablaCitas')) {
+        mostrarCitas();
+    }
+});
 
 console.log("📢 admin.js ha sido cargado correctamente.");
 

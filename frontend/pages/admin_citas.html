@@ -7,14 +7,41 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <nav>
-        <h1>Citas Agendadas</h1>
-        <ul>
+
+    <!-- 📌 Nueva Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
             <li><a href="admin_dashboard.html">Inicio</a></li>
+            <li><a href="admin_pacientes.html">Pacientes</a></li>
+            <li><a href="admin_citas.html" class="active">Citas</a></li>
+            <li><a href="admin_nuevo_paciente.html">Agregar Paciente</a></li>
+            <li><a href="admin_agendar_citas.html">Agendar Cita</a></li>
+            <li><a href="login.html">Cerrar Sesion</a></li>
         </ul>
     </nav>
-    <ul id="listaCitas"></ul>
-    <script type="module" src="../js/admin.js"></script>
 
+    <div class="container">
+        <h1>Citas Agendadas</h1>
+        <p>Aquí puedes visualizar todas las citas registradas.</p>
+
+        <table id="tablaCitas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Doctor</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las citas se insertarán aquí con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module" src="../js/admin.js"></script>
 </body>
 </html>

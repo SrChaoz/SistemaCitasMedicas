@@ -7,15 +7,32 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <nav>
-        <h1>Panel Administrativo</h1>
-        <ul>
+
+    <!-- 📌 Nueva Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="admin_dashboard.html" class="active">Inicio</a></li>
             <li><a href="admin_pacientes.html">Pacientes</a></li>
             <li><a href="admin_citas.html">Citas</a></li>
             <li><a href="admin_nuevo_paciente.html">Agregar Paciente</a></li>
-            <li><a href="admin_agendar_cita.html">Agendar Cita</a></li>
+            <li><a href="admin_agendar_citas.html">Agendar Cita</a></li>
+            <li><a href="login.html">Cerrar Sesion</a></li>
+
         </ul>
     </nav>
-    <h2>Bienvenido, Administrador</h2>
+
+    <div class="dashboard-container">
+        <h1>Bienvenido al Panel Administrativo</h1>
+        <p>Desde aquí puedes gestionar los pacientes y las citas médicas.</p>
+        <div class="dashboard-cards">
+            <a href="admin_pacientes.html" class="card">📋 Ver Pacientes</a>
+            <a href="admin_citas.html" class="card">📅 Ver Citas</a>
+            <a href="admin_nuevo_paciente.html" class="card">➕ Agregar Paciente</a>
+            <a href="admin_agendar_cita.html" class="card">📌 Agendar Cita</a>
+        </div>
+    </div>
+
+    <script type="module" src="../js/admin.js"></script>
 </body>
 </html>

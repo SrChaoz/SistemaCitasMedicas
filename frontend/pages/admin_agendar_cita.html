@@ -7,15 +7,25 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <nav>
-        <h1>Agendar Nueva Cita</h1>
-        <ul>
+
+    <!-- 📌 Nueva Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
             <li><a href="admin_dashboard.html">Inicio</a></li>
+            <li><a href="admin_pacientes.html">Pacientes</a></li>
+            <li><a href="admin_citas.html">Citas</a></li>
+            <li><a href="admin_nuevo_paciente.html">Agregar Paciente</a></li>
+            <li><a href="admin_agendar_cita.html" class="active">Agendar Cita</a></li>
+            <li><a href="login.html">Cerrar Sesion</a></li>
+
         </ul>
     </nav>
 
-    <div class="form-container">
-        <h2>Datos de la Cita</h2>
+    <div class="container">
+        <h1>Agendar Nueva Cita</h1>
+        <p>Completa los campos para registrar una nueva cita médica.</p>
+
         <form id="formNuevaCita">
             <label for="pacienteId">ID del Paciente:</label>
             <input type="text" id="pacienteId" required>
@@ -37,8 +47,6 @@
         
             <button type="submit">Agendar Cita</button>
         </form>
-        
-        
     </div>
 
     <script type="module" src="../js/admin.js"></script>

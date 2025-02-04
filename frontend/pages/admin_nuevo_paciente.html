@@ -7,15 +7,25 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <nav>
-        <h1>Registrar Nuevo Paciente</h1>
-        <ul>
+
+    <!-- 📌 Nueva Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
             <li><a href="admin_dashboard.html">Inicio</a></li>
+            <li><a href="admin_pacientes.html">Pacientes</a></li>
+            <li><a href="admin_citas.html">Citas</a></li>
+            <li><a href="admin_nuevo_paciente.html" class="active">Agregar Paciente</a></li>
+            <li><a href="admin_agendar_cita.html">Agendar Cita</a></li>
+            <li><a href="login.html">Cerrar Sesion</a></li>
+
         </ul>
     </nav>
 
-    <div class="form-container">
-        <h2>Datos del Paciente</h2>
+    <div class="container">
+        <h1>Registrar Nuevo Paciente</h1>
+        <p>Ingresa los datos del nuevo paciente para registrarlo en el sistema.</p>
+
         <form id="formNuevoPaciente">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" required>
@@ -31,14 +41,6 @@
         
             <button type="submit">Registrar Paciente</button>
         </form>
-        
-        <script type="module" src="../js/admin.js"></script>
-
-        
-        
-        <script type="module" src="../js/admin.js"></script>
-
-        
     </div>
 
     <script type="module" src="../js/admin.js"></script>

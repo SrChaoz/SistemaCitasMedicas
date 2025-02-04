@@ -1,53 +1,57 @@
 import { apiRequest } from './app.js';
 
-// Obtener citas de un doctor por ID
+// 📌 Función para obtener citas del doctor y mostrarlas en una tabla
 async function obtenerCitasDoctor(doctorId) {
     console.log("📢 Solicitando citas para el doctor ID:", doctorId);
 
     const citas = await apiRequest(`/citas/doctor/${doctorId}`, 'GET');
     console.log("📢 Citas recibidas:", citas);
 
-    const listaCitas = document.getElementById('listaCitas');
+    const tablaCitas = document.getElementById('tablaCitas').querySelector('tbody');
 
-    if (!listaCitas) {
-        console.warn("⚠️ No se encontró `listaCitas`. Verifica el HTML.");
+    if (!tablaCitas) {
+        console.warn("⚠️ No se encontró `tablaCitas`. Verifica el HTML.");
         return;
     }
 
-    listaCitas.innerHTML = '';
+    tablaCitas.innerHTML = '';
 
     if (!Array.isArray(citas) || citas.length === 0) {
-        listaCitas.innerHTML = '<li>No hay citas registradas.</li>';
+        tablaCitas.innerHTML = '<tr><td colspan="6">No hay citas registradas.</td></tr>';
         return;
     }
 
     citas.forEach(cita => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <strong>Paciente:</strong> ${cita.paciente} <br>
-            <strong>Fecha:</strong> ${new Date(cita.fecha).toLocaleDateString()} - <strong>Hora:</strong> ${cita.hora} <br>
-            <strong>Estado:</strong> ${cita.estado} <br>
-            ${cita.estado === "Pendiente" ? `<button data-id="${cita.id_cita}" class="btnCompletar">Marcar como Completada</button>` : ""}
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cita.id_cita}</td>
+            <td>${cita.paciente}</td>
+            <td>${new Date(cita.fecha).toLocaleDateString()}</td>
+            <td>${cita.hora}</td>
+            <td>${cita.estado}</td>
+            <td>
+                ${cita.estado === "Pendiente" ? `<button data-id="${cita.id_cita}" class="btnCompletar">✔ Completar</button>` : "✅ Completada"}
+            </td>
         `;
-        listaCitas.appendChild(li);
+        tablaCitas.appendChild(row);
     });
 
-    // 🚀 Esperar un poco antes de asignar eventos a los botones
-    setTimeout(() => {
-        document.querySelectorAll('.btnCompletar').forEach(button => {
-            button.addEventListener('click', async (event) => {
-                const citaId = event.target.dataset.id;
-                console.log("📢 Botón presionado para cita:", citaId);
+    // 🚀 Agregar eventos a los botones de completar cita
+    document.querySelectorAll('.btnCompletar').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const citaId = event.target.dataset.id;
+            console.log("📢 Botón presionado para cita:", citaId);
 
-                await completarCita(citaId);
-                console.log("📢 Cita marcada como completada. Recargando citas...");
-                obtenerCitasDoctor(doctorId); // Recargar la lista
-            });
+            await completarCita(citaId);
+            console.log("📢 Cita marcada como completada. Recargando citas...");
+            obtenerCitasDoctor(doctorId); // Recargar la tabla
         });
-    }, 500);
+    });
+
+    console.log("✅ Citas mostradas en la tabla.");
 }
 
-// Marcar cita como completada
+// 📌 Función para marcar cita como completada
 async function completarCita(citaId) {
     console.log("📢 Enviando solicitud para completar la cita ID:", citaId);
     
@@ -63,7 +67,7 @@ async function completarCita(citaId) {
     alert("Cita completada correctamente.");
 }
 
-// Evento para el botón de buscar citas
+// 📌 Evento para el botón de buscar citas
 document.getElementById("buscarCitas").addEventListener("click", () => {
     const doctorId = document.getElementById("doctorId").value;
 
@@ -76,7 +80,6 @@ document.getElementById("buscarCitas").addEventListener("click", () => {
 });
 
 console.log("📢 doctor.js cargado correctamente.");
-
 
 /*import { apiRequest } from './app.js';
 

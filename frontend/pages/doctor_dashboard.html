@@ -7,12 +7,24 @@
     <link rel="stylesheet" href="../css/doctor.css">
 </head>
 <body>
-    <nav>
-        <h1>Panel Médico</h1>
-        <ul>
+
+    <!-- 📌 Nueva Barra de Navegación -->
+    <nav class="navbar">
+        <div class="logo">Panel Médico</div>
+        <ul class="nav-links">
+            <li><a href="doctor_dashboard.html" class="active">Inicio</a></li>
             <li><a href="doctor_citas.html">Citas Agendadas</a></li>
+            <li><a href="login.html">Cerrar Sesion</a></li>
         </ul>
     </nav>
-    <h2>Bienvenido, Doctor</h2>
+
+    <div class="dashboard-container">
+        <h1>Bienvenido, Doctor</h1>
+        <p>Aquí puedes gestionar tus citas médicas.</p>
+        <div class="dashboard-cards">
+            <a href="doctor_citas.html" class="card">📅 Ver Citas Agendadas</a>
+        </div>
+    </div>
+
 </body>
 </html>
