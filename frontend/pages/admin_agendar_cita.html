@@ -24,14 +24,18 @@
 
     <div class="container">
         <h1>Agendar Nueva Cita</h1>
-        <p>Completa los campos para registrar una nueva cita médica.</p>
+        <p>Selecciona un paciente y un doctor para agendar la cita.</p>
 
         <form id="formNuevaCita">
-            <label for="pacienteId">ID del Paciente:</label>
-            <input type="text" id="pacienteId" required>
+            <label for="pacienteId">Seleccionar Paciente:</label>
+            <select id="pacienteId" required>
+                <option value="">Cargando pacientes...</option>
+            </select>
         
-            <label for="doctorId">ID del Doctor:</label>
-            <input type="text" id="doctorId" required>
+            <label for="doctorId">Seleccionar Doctor:</label>
+            <select id="doctorId" required>
+                <option value="">Cargando doctores...</option>
+            </select>
         
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" required>

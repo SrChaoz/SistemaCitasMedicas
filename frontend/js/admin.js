@@ -1,5 +1,82 @@
 import { apiRequest, obtenerPacientes, obtenerCitas, agendarCita } from './app.js';
 
+
+// 📌 Función para cargar pacientes en el select
+async function cargarPacientes() {
+    const pacientes = await apiRequest('/pacientes', 'GET');
+    const selectPacientes = document.getElementById('pacienteId');
+
+    if (!selectPacientes) return;
+
+    selectPacientes.innerHTML = '<option value="">Selecciona un paciente</option>';
+
+    pacientes.forEach(paciente => {
+        const option = document.createElement('option');
+        option.value = paciente.id_paciente;
+        option.textContent = `${paciente.nombre} ${paciente.apellido}`;
+        selectPacientes.appendChild(option);
+    });
+}
+
+// 📌 Función para cargar doctores en el select
+async function cargarDoctores() {
+    const doctores = await apiRequest('/doctores', 'GET');
+    const selectDoctores = document.getElementById('doctorId');
+
+    if (!selectDoctores) return;
+
+    selectDoctores.innerHTML = '<option value="">Selecciona un doctor</option>';
+
+    doctores.forEach(doctor => {
+        const option = document.createElement('option');
+        option.value = doctor.id_doctor;
+        option.textContent = `Dr. ${doctor.nombre} ${doctor.apellido}`;
+        selectDoctores.appendChild(option);
+    });
+}
+
+// 📌 Función para enviar el formulario de nueva cita
+async function nuevaCita(event) {
+    event.preventDefault();
+
+    const pacienteId = document.getElementById('pacienteId').value;
+    const doctorId = document.getElementById('doctorId').value;
+    const fecha = document.getElementById('fecha').value;
+    const hora = document.getElementById('hora').value;
+    const estado = document.getElementById('estado').value;
+
+    if (!pacienteId || !doctorId) {
+        alert("Por favor, selecciona un paciente y un doctor.");
+        return;
+    }
+
+    const response = await apiRequest('/citas', 'POST', { 
+        id_paciente: pacienteId, 
+        id_doctor: doctorId, 
+        fecha, 
+        hora, 
+        estado 
+    });
+
+    if (response && !response.error) {
+        alert("Cita agendada correctamente.");
+        document.getElementById('formNuevaCita').reset();
+    } else {
+        alert("Hubo un error al agendar la cita.");
+    }
+}
+
+// 📌 Ejecutar funciones al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("📢 Cargando lista de pacientes y doctores...");
+    cargarPacientes();
+    cargarDoctores();
+
+    const formCita = document.getElementById('formNuevaCita');
+    if (formCita) {
+        formCita.addEventListener('submit', nuevaCita);
+    }
+});
 // Función para mostrar pacientes
 async function mostrarPacientes() {
     try {
@@ -133,7 +210,7 @@ async function nuevoPaciente(event) {
         alert("No se pudo agregar el paciente. Verifica la consola.");
     }
 }
-
+/*
 // Función para agendar una nueva cita
 async function nuevaCita(event) {
     event.preventDefault();
@@ -171,7 +248,7 @@ async function nuevaCita(event) {
         alert("No se pudo agendar la cita. Verifica la consola.");
     }
 }
-
+*/
 
 console.log("Script admin.js cargado");
 document.addEventListener('DOMContentLoaded', () => {
