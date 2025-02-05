@@ -1,4 +1,4 @@
-/* 📌 Contenedor General */
+/* Contenedor General */
 .container {
     max-width: 900px;
     margin: auto;
@@ -13,7 +13,7 @@ h1 {
     color: #2C3E50;
 }
 
-/* 📌 Tablas */
+/* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -30,7 +30,7 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #4c91af;
     color: white;
 }
 
@@ -43,7 +43,7 @@ tr:hover {
 }
 
 
-/* 📌 Estilos Generales */
+/* Estilos Generales */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -52,7 +52,7 @@ body {
     color: #333;
 }
 
-/* 📌 Barra de Navegación */
+/* Barra de Navegación */
 .navbar {
     background-color: #2C3E50;
     display: flex;
@@ -62,9 +62,18 @@ body {
 }
 
 .navbar .logo {
+    display: flex;
+    align-items: center;
     font-size: 22px;
     color: white;
     font-weight: bold;
+}
+
+/* Estilos para la imagen del logo */
+.logo-img {
+    width: 40px;  /* Ajustar tamaño */
+    height: auto;
+    margin-right: 10px;  /* Espacio entre la imagen y el texto */
 }
 
 .nav-links {
@@ -95,7 +104,7 @@ body {
     background: #1ABC9C;
 }
 
-/* 📌 Estilos para Formularios */
+/* Estilos para Formularios */
 form {
     display: flex;
     flex-direction: column;
@@ -112,18 +121,18 @@ input, select, button {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #4c91af;
     color: white;
     cursor: pointer;
     border: none;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #266c8a;
 }
 
 
-/* 📌 Contenedor del Dashboard */
+/* Contenedor del Dashboard */
 .dashboard-container {
     text-align: center;
     padding: 40px;
@@ -138,7 +147,7 @@ button:hover {
     margin-bottom: 30px;
 }
 
-/* 📌 Estilos para las Tarjetas del Dashboard */
+/* Estilos para las Tarjetas del Dashboard */
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -166,7 +175,7 @@ button:hover {
     color: white;
 }
 
-/* 📌 Estilos Responsivos */
+/* Estilos Responsivos */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -183,7 +192,7 @@ button:hover {
     }
 }
 
-/* 📌 Contenedor General */
+/* Contenedor General */
 .container {
     max-width: 600px;
     margin: auto;
@@ -203,7 +212,7 @@ p {
     margin-bottom: 20px;
 }
 
-/* 📌 Estilos para Formularios */
+/* Estilos para Formularios */
 form {
     display: flex;
     flex-direction: column;
@@ -229,19 +238,7 @@ input, select {
     background-color: #f9f9f9;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* 📌 Diseño Responsivo */
+/* Diseño Responsivo */
 @media (max-width: 768px) {
     .container {
         width: 90%;

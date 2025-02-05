@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pacientes</title>
+    <title>Registrar Nuevo Doctor</title>
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
@@ -16,37 +16,35 @@
         </div>
         <ul class="nav-links">
             <li><a href="admin_dashboard.html">Inicio</a></li>
-            <li><a href="admin_pacientes.html" class="active">Pacientes</a></li>
+            <li><a href="admin_pacientes.html">Pacientes</a></li>
             <li><a href="admin_citas.html">Citas</a></li>
             <li><a href="admin_doctores.html">Doctores</a></li>
             <li><a href="admin_nuevo_paciente.html">Agregar Paciente</a></li>
-            <li><a href="admin_nuevo_doctor.html">Agregar Doctor</a></li>
+            <li><a href="admin_nuevo_doctor.html" class="active">Agregar Doctor</a></li>
             <li><a href="admin_agendar_cita.html">Agendar Cita</a></li>
             <li><a href="login.html">Cerrar Sesion</a></li>
-
         </ul>
     </nav>
 
     <div class="container">
-        <h1>Lista de Pacientes</h1>
-        <p>Aquí puedes ver todos los pacientes registrados en el sistema.</p>
+        <h1>Registrar Nuevo Doctor</h1>
+        <p>Ingrese los datos del doctor para registrarlo en el sistema.</p>
 
-        <table id="tablaPacientes">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los pacientes se insertarán aquí con JavaScript -->
-            </tbody>
-        </table>
+        <form id="formNuevoDoctor">
+            <label for="nombreDoctor">Nombre:</label>
+            <input type="text" id="nombreDoctor" required>
+        
+            <label for="apellidoDoctor">Apellido:</label>
+            <input type="text" id="apellidoDoctor" required>
+        
+            <label for="telefonoDoctor">Teléfono:</label>
+            <input type="text" id="telefonoDoctor">
+        
+            <button type="submit">Registrar Doctor</button>
+        </form>
     </div>
 
     <script type="module" src="../js/admin.js"></script>
+
 </body>
 </html>

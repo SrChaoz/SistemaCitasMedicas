@@ -1,5 +1,5 @@
-// Configurar la URL base del backend
-const BASE_URL = 'http://localhost:5000/api';  // <-- Cambiar 3000 por 5000
+//URL base del backend
+const BASE_URL = 'http://localhost:5000/api';  
 
 // Función para realizar solicitudes al backend
 async function apiRequest(endpoint, method = 'GET', data = null) {
@@ -12,7 +12,7 @@ async function apiRequest(endpoint, method = 'GET', data = null) {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
-        // **Verificar si la respuesta es JSON válido**
+        // Verificar si la respuesta es JSON valido
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
             console.error("Respuesta del servidor:", await response.text()); // Muestra lo que devuelve el servidor
@@ -28,34 +28,34 @@ async function apiRequest(endpoint, method = 'GET', data = null) {
 
 
 
-// **Definir correctamente `obtenerPacientes`**
+// Obtener Pacientes
 async function obtenerPacientes() {
     return await apiRequest('/pacientes', 'GET');
 }
 
-// **Definir correctamente `obtenerCitas`**
+// Obtener Citas
 async function obtenerCitas() {
     try {
         const response = await fetch(`${BASE_URL}/citas`);
-        console.log("📢 Respuesta del servidor:", response); // 🚀 Depuración
+        console.log(" Respuesta del servidor:", response); // Depuracion
 
         const data = await response.json();
-        console.log("📢 Datos recibidos en obtenerCitas():", data); // 🚀 Verificar si hay datos
+        console.log("Datos recibidos en obtenerCitas():", data); // Verificar si hay datos
 
         if (!Array.isArray(data)) {
-            console.error("❌ Error: La API no devolvió un array", data);
+            console.error("Error: La API no devolvió un array", data);
             return [];
         }
 
         return data;
     } catch (error) {
-        console.error("❌ Error en obtenerCitas():", error);
+        console.error("Error en obtenerCitas():", error);
         return [];
     }
 }
 
 
-// **Definir correctamente `agendarCita`**
+//Rutas
 async function agendarCita(pacienteId, doctorId, fecha, hora, estado) {
     return await apiRequest('/citas', 'POST', { pacienteId, doctorId, fecha, hora, estado });
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pacientes</title>
+    <title>Lista de Doctores</title>
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
@@ -11,42 +11,41 @@
     <!-- Barra de Navegación -->
     <nav class="navbar">
         <div class="logo">
-            <img src="../assets/icons/logomedicode.png" alt="Logo" class="logo-img">
-            MEDICODE
+            <img src="../img/logo.png" alt="Logo" class="logo-img">
+            Admin Panel
         </div>
         <ul class="nav-links">
             <li><a href="admin_dashboard.html">Inicio</a></li>
-            <li><a href="admin_pacientes.html" class="active">Pacientes</a></li>
+            <li><a href="admin_pacientes.html">Pacientes</a></li>
             <li><a href="admin_citas.html">Citas</a></li>
-            <li><a href="admin_doctores.html">Doctores</a></li>
+            <li><a href="admin_doctores.html" class="active">Doctores</a></li>
             <li><a href="admin_nuevo_paciente.html">Agregar Paciente</a></li>
             <li><a href="admin_nuevo_doctor.html">Agregar Doctor</a></li>
             <li><a href="admin_agendar_cita.html">Agendar Cita</a></li>
-            <li><a href="login.html">Cerrar Sesion</a></li>
-
+            <li><a href="login.html">Cerrar Sesión</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h1>Lista de Pacientes</h1>
-        <p>Aquí puedes ver todos los pacientes registrados en el sistema.</p>
+        <h1>Lista de Doctores</h1>
+        <p>Aquí puedes ver todos los doctores registrados en el sistema.</p>
 
-        <table id="tablaPacientes">
+        <table id="tablaDoctores">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Teléfono</th>
-                    <th>Dirección</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Los pacientes se insertarán aquí con JavaScript -->
+                <!-- Los doctores se insertarán aquí con JavaScript -->
             </tbody>
         </table>
     </div>
 
     <script type="module" src="../js/admin.js"></script>
+
 </body>
 </html>

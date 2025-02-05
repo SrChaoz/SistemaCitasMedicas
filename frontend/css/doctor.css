@@ -1,4 +1,4 @@
-/* 📌 Contenedor General */
+/* Contenedor General */
 .container {
     max-width: 800px;
     margin: auto;
@@ -18,7 +18,7 @@ p {
     margin-bottom: 20px;
 }
 
-/* 📌 Estilos para el Formulario */
+/* Estilos para el Formulario */
 .form-container {
     display: flex;
     justify-content: center;
@@ -49,7 +49,7 @@ p {
     background-color: #16A085;
 }
 
-/* 📌 Estilos para la Tabla */
+/* Estilos para la Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -66,7 +66,7 @@ th, td {
 }
 
 th {
-    background-color: #007BFF;
+    background-color: #3f77b3;
     color: white;
 }
 
@@ -78,7 +78,7 @@ tr:hover {
     background-color: #ddd;
 }
 
-/* 📌 Botón para Marcar Cita como Completada */
+/* Botón para Marcar Cita como Completada */
 button.btnCompletar {
     background-color: #28a745;
     color: white;
@@ -93,7 +93,7 @@ button.btnCompletar:hover {
     background-color: #218838;
 }
 
-/* 📌 Diseño Responsivo */
+/* Diseño Responsivo */
 @media (max-width: 768px) {
     .container {
         width: 90%;
@@ -114,7 +114,7 @@ button.btnCompletar:hover {
 }
 
 
-/* 📌 Estilos Generales */
+/* Estilos Generales */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -123,7 +123,7 @@ body {
     color: #333;
 }
 
-/* 📌 Barra de Navegación */
+/* Barra de Navegación */
 .navbar {
     background-color: #34495E;
     display: flex;
@@ -133,11 +133,18 @@ body {
 }
 
 .navbar .logo {
+    display: flex;
+    align-items: center;
     font-size: 22px;
     color: white;
     font-weight: bold;
 }
 
+.logo-img {
+    width: 40px;  /* Ajustar tamaño */
+    height: auto;
+    margin-right: 10px;  /* Espacio entre la imagen y el texto */
+}
 .nav-links {
     list-style: none;
     padding: 0;
@@ -166,7 +173,7 @@ body {
     background: #1ABC9C;
 }
 
-/* 📌 Contenedor del Dashboard */
+/* Contenedor del Dashboard */
 .dashboard-container {
     text-align: center;
     padding: 40px;
@@ -181,7 +188,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* 📌 Estilos para las Tarjetas del Dashboard */
+/* Estilos para las Tarjetas del Dashboard */
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -209,7 +216,7 @@ body {
     color: white;
 }
 
-/* 📌 Estilos Responsivos */
+/* Estilos Responsivos */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;

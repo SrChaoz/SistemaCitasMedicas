@@ -1,7 +1,7 @@
 import { apiRequest, obtenerPacientes, obtenerCitas, agendarCita } from './app.js';
 
 
-// 📌 Función para cargar pacientes en el select
+// Función para cargar pacientes en el select
 async function cargarPacientes() {
     const pacientes = await apiRequest('/pacientes', 'GET');
     const selectPacientes = document.getElementById('pacienteId');
@@ -18,7 +18,7 @@ async function cargarPacientes() {
     });
 }
 
-// 📌 Función para cargar doctores en el select
+// Función para cargar doctores en el select
 async function cargarDoctores() {
     const doctores = await apiRequest('/doctores', 'GET');
     const selectDoctores = document.getElementById('doctorId');
@@ -35,7 +35,7 @@ async function cargarDoctores() {
     });
 }
 
-// 📌 Función para enviar el formulario de nueva cita
+// Función para enviar el formulario de nueva cita
 async function nuevaCita(event) {
     event.preventDefault();
 
@@ -66,9 +66,9 @@ async function nuevaCita(event) {
     }
 }
 
-// 📌 Ejecutar funciones al cargar la página
+//  Ejecutar funciones al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("📢 Cargando lista de pacientes y doctores...");
+    console.log("Cargando lista de pacientes y doctores...");
     cargarPacientes();
     cargarDoctores();
 
@@ -81,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 async function mostrarPacientes() {
     try {
         const pacientes = await obtenerPacientes();
-        console.log("📢 Pacientes recibidos:", pacientes);
+        console.log("Pacientes recibidos:", pacientes);
 
         const tablaPacientes = document.getElementById('tablaPacientes').querySelector('tbody');
 
         if (!tablaPacientes) {
-            console.warn("⚠️ No se encontró `tablaPacientes`. Verifica el HTML.");
+            console.warn("No se encontró `tablaPacientes`. Verifica el HTML.");
             return;
         }
 
@@ -104,22 +104,22 @@ async function mostrarPacientes() {
             tablaPacientes.appendChild(row);
         });
 
-        console.log("✅ Pacientes mostrados en la tabla.");
+        console.log("Pacientes mostrados en la tabla.");
     } catch (error) {
-        console.error("❌ Error al obtener pacientes:", error);
+        console.error(" Error al obtener pacientes:", error);
     }
 }
 
-// 📌 Función para mostrar citas en una tabla
+// Función para mostrar citas en una tabla
 async function mostrarCitas() {
     try {
         const citas = await obtenerCitas();
-        console.log("📢 Citas recibidas:", citas);
+        console.log("Citas recibidas:", citas);
 
         const tablaCitas = document.getElementById('tablaCitas').querySelector('tbody');
 
         if (!tablaCitas) {
-            console.warn("⚠️ No se encontró `tablaCitas`. Verifica el HTML.");
+            console.warn(" No se encontró `tablaCitas`. Verifica el HTML.");
             return;
         }
 
@@ -138,15 +138,15 @@ async function mostrarCitas() {
             tablaCitas.appendChild(row);
         });
 
-        console.log("✅ Citas mostradas en la tabla.");
+        console.log(" Citas mostradas en la tabla.");
     } catch (error) {
-        console.error("❌ Error al obtener citas:", error);
+        console.error("Error al obtener citas:", error);
     }
 }
 
-// 📌 Ejecutar funciones cuando cargue la página
+// Ejecutar funciones cuando cargue la página
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("📢 DOM cargado, mostrando datos en tablas.");
+    console.log("DOM cargado, mostrando datos en tablas.");
 
     if (document.getElementById('tablaPacientes')) {
         mostrarPacientes();
@@ -157,18 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-console.log("📢 admin.js ha sido cargado correctamente.");
+console.log(" admin.js ha sido cargado correctamente.");
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("📢 DOM cargado, ejecutando mostrarCitas()");
+    console.log(" DOM cargado, ejecutando mostrarCitas()");
 
     const listaCitas = document.getElementById('listaCitas');
 
     if (listaCitas) {
-        console.log("📢 `listaCitas` detectado, ejecutando `mostrarCitas()`.");
+        console.log("`listaCitas` detectado, ejecutando `mostrarCitas()`.");
         mostrarCitas(); // <-- FORZAMOS la ejecución aquí
     } else {
-        console.warn("⚠️ `listaCitas` no encontrado en el DOM.");
+        console.warn(" `listaCitas` no encontrado en el DOM.");
     }
 });
 
@@ -210,6 +210,104 @@ async function nuevoPaciente(event) {
         alert("No se pudo agregar el paciente. Verifica la consola.");
     }
 }
+
+// Función para agregar un nuevo doctor
+async function nuevoDoctor(event) {
+    event.preventDefault();
+    console.log("Enviando solicitud para registrar un nuevo doctor...");
+
+    const nombre = document.getElementById('nombreDoctor').value;
+    const apellido = document.getElementById('apellidoDoctor').value;
+    const telefono = document.getElementById('telefonoDoctor').value;
+
+    console.log("Datos Capturados:", { nombre, apellido, telefono });
+
+    try {
+        const response = await fetch('http://localhost:5000/api/doctores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, apellido, telefono })
+        });
+
+        console.log("Respuesta del Servidor:", response);
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Error al registrar el doctor");
+        }
+
+        const data = await response.json();
+        console.log("Doctor Registrado:", data);
+        alert(`Doctor ${data.nombre} ${data.apellido} agregado correctamente.`);
+        document.getElementById('formNuevoDoctor').reset();
+
+    } catch (error) {
+        console.error("Error en el fetch:", error.message);
+        alert("No se pudo registrar el doctor. Verifica la consola.");
+    }
+}
+
+// Ejecutar funciones cuando cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM cargado, verificando formularios...");
+
+    const formDoctor = document.getElementById('formNuevoDoctor');
+    if (formDoctor) {
+        console.log("Formulario de doctor detectado.");
+        formDoctor.addEventListener('submit', nuevoDoctor);
+    } else {
+        console.warn("No se encontró el formulario de doctor. Esto es normal si no estás en la página de doctores.");
+    }
+});
+
+// Función para obtener y mostrar la lista de doctores
+async function mostrarDoctores() {
+    try {
+        console.log("Obteniendo lista de doctores...");
+        const doctores = await apiRequest('/doctores', 'GET');
+        console.log("Doctores recibidos:", doctores);
+
+        const tablaDoctores = document.getElementById('tablaDoctores').querySelector('tbody');
+
+        if (!tablaDoctores) {
+            console.warn("No se encontró `tablaDoctores`. Verifica el HTML.");
+            return;
+        }
+
+        tablaDoctores.innerHTML = ''; // Limpiar tabla antes de agregar nuevos elementos
+
+        if (!Array.isArray(doctores) || doctores.length === 0) {
+            tablaDoctores.innerHTML = '<tr><td colspan="4">No hay doctores registrados.</td></tr>';
+            return;
+        }
+
+        doctores.forEach(doctor => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${doctor.id_doctor}</td>
+                <td>${doctor.nombre}</td>
+                <td>${doctor.apellido}</td>
+                <td>${doctor.telefono ? doctor.telefono : 'N/A'}</td>
+            `;
+            tablaDoctores.appendChild(row);
+        });
+
+        console.log("📢 Doctores mostrados en la tabla.");
+    } catch (error) {
+        console.error(" Error al obtener doctores:", error);
+    }
+}
+
+// Ejecutar funciones cuando cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM cargado, verificando página...");
+
+    if (document.getElementById('tablaDoctores')) {
+        console.log("`tablaDoctores` detectado, ejecutando `mostrarDoctores()`.");
+        mostrarDoctores();
+    }
+});
+
 /*
 // Función para agendar una nueva cita
 async function nuevaCita(event) {
@@ -281,5 +379,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-console.log("📢 admin.js ha sido cargado correctamente.");
+console.log(" admin.js ha sido cargado correctamente.");
 

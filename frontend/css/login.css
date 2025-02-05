@@ -1,4 +1,4 @@
-/* 📌 Estilos Generales */
+/* Estilos Generales */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -10,10 +10,10 @@ body {
     background: #f4f4f4;
 }
 
-/* 📌 Contenedor del Login */
+/* Contenedor del Login */
 .login-container {
     background: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -26,7 +26,7 @@ h2 {
     color: #34495E;
 }
 
-/* 📌 Estilos para los Campos de Entrada */
+/* Estilos para los Campos de Entrada */
 input, select, button {
     width: 100%;
     padding: 12px;
@@ -36,7 +36,7 @@ input, select, button {
     font-size: 16px;
 }
 
-/* 📌 Estilo del Botón */
+/* Estilo del Botón */
 button {
     background-color: #1ABC9C;
     color: white;
@@ -51,14 +51,14 @@ button:hover {
     background-color: #16A085;
 }
 
-/* 📌 Mensaje de Error */
+/* Mensaje de Error */
 #error-message {
     color: red;
     font-size: 14px;
     margin-top: 10px;
 }
 
-/* 📌 Diseño Responsivo */
+/* Diseño Responsivo */
 @media (max-width: 400px) {
     .login-container {
         width: 90%;
