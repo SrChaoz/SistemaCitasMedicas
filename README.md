@@ -3,7 +3,8 @@ En caso de querer usar el proyecto puedes iniciarlo de la siguiente manera
 Primero instalar las dependencias de Node.js con:
 npm install express pg bcryptjs jsonwebtoken dotenv cors   
 luego instala nodemon:
-npm install --save-dev nodemon   
+npm install --save-dev nodemon 
+y corre el backend con npm run dev
 y ejecuta el index.html con five server 
 tambien debes crear las tablas en la base de datos y crear el archivo .env con las credenciales de tu base de datos de PostgreSQL en la carpeta de backend
 
