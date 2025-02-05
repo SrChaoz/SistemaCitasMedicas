@@ -3,9 +3,9 @@ const router = express.Router();
 const pacienteController = require("../controllers/paciente.controller");
 
 // Obtener todos los pacientes
-router.get("/", pacienteController.getPacientes);  // Cambiado de "/pacientes" a "/"
+router.get("/", pacienteController.getPacientes);  
 
 // Crear un nuevo paciente
-router.post("/", pacienteController.createPaciente);  // Cambiado de "/pacientes" a "/"
+router.post("/", pacienteController.createPaciente);  
 
 module.exports = router;

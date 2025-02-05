@@ -19,7 +19,7 @@ app.use("/api/pacientes", pacienteRoutes);
 app.use("/api/citas", citaRoutes);
 app.use("/api/auth", authRoutes);
 
-// Iniciar servidor
+// Iniciar servidor npm run dev
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);  //Ruta para probar el backend

@@ -11,7 +11,7 @@ const getCitas = async (req, res) => {
           JOIN Doctor d ON c.ID_Doctor = d.ID_Doctor
       `);
       
-      console.log("Citas obtenidas:", result.rows); // 🚀 Verifica si devuelve datos
+      console.log("Citas obtenidas:", result.rows); // Depuración
       res.json(result.rows);
   } catch (error) {
       console.error("Error al obtener citas:", error);
@@ -23,7 +23,7 @@ const getCitas = async (req, res) => {
 // Crear una nueva cita
 const createCita = async (req, res) => {
   try {
-      console.log("Datos recibidos en el backend:", req.body);  // 🚀 Depuración
+      console.log("Datos recibidos en el backend:", req.body);  //  Depuración
 
       const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
 
@@ -44,7 +44,7 @@ const createCita = async (req, res) => {
 };
 
 
-// Actualizar una cita (cambiar estado)
+// Actualizar una cita cambiar estado
 const updateCita = async (req, res) => {
   try {
       const { id } = req.params;
@@ -63,10 +63,10 @@ const updateCita = async (req, res) => {
           return res.status(404).json({ error: "Cita no encontrada" });
       }
 
-      console.log("✅ Cita actualizada en la base de datos:", result.rows[0]); // ✅ Depuración
+      console.log(" Cita actualizada en la base de datos:", result.rows[0]); // Depuración
       res.json(result.rows[0]);
   } catch (error) {
-      console.error("❌ Error al actualizar cita:", error);
+      console.error("Error al actualizar cita:", error);
       res.status(500).json({ error: "Error al actualizar la cita" });
   }
 };
@@ -104,10 +104,10 @@ const getCitasDoctor = async (req, res) => {
             WHERE c.ID_Doctor = $1
         `, [id_doctor]);
 
-        console.log("📢 Citas obtenidas para el doctor:", result.rows);
+        console.log("Citas obtenidas para el doctor:", result.rows);
         res.json(result.rows);
     } catch (error) {
-        console.error("❌ Error al obtener citas del doctor:", error);
+        console.error(" Error al obtener citas del doctor:", error);
         res.status(500).json({ error: "Error al obtener citas del doctor" });
     }
 };
@@ -128,7 +128,7 @@ const completarCita = async (req, res) => {
 
         res.json({ message: "Cita marcada como completada", cita: result.rows[0] });
     } catch (error) {
-        console.error("❌ Error al actualizar cita:", error);
+        console.error(" Error al actualizar cita:", error);
         res.status(500).json({ error: "Error al actualizar la cita" });
     }
 };
