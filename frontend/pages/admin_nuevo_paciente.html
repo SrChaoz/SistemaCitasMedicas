@@ -22,8 +22,7 @@
             <li><a href="admin_nuevo_paciente.html" class="active">Agregar Paciente</a></li>
             <li><a href="admin_nuevo_doctor.html">Agregar Doctor</a></li>
             <li><a href="admin_agendar_cita.html">Agendar Cita</a></li>
-            <li><a href="login.html">Cerrar Sesion</a></li>
-
+            <li><a href="login.html">Cerrar Sesión</a></li>
         </ul>
     </nav>
 
@@ -43,6 +42,25 @@
         
             <label for="direccion">Dirección:</label>
             <input type="text" id="direccion">
+        
+            <label for="nro_cedula">Cédula:</label>
+            <input type="text" id="nro_cedula" required>
+        
+            <label for="genero">Género:</label>
+            <select id="genero">
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+            </select>
+        
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" step="0.01">
+        
+            <label for="altura">Altura (m):</label>
+            <input type="number" id="altura" step="0.01">
+        
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" required>
         
             <button type="submit">Registrar Paciente</button>
         </form>

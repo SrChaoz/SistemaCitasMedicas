@@ -1,5 +1,6 @@
-import { apiRequest, obtenerPacientes, obtenerCitas, agendarCita } from './app.js';
 
+// Función para cargar pacientes en el select
+import { apiRequest, obtenerPacientes, obtenerCitas, agendarCita } from './app.js';
 
 // Función para cargar pacientes en el select
 async function cargarPacientes() {
@@ -29,13 +30,25 @@ async function cargarDoctores() {
 
     doctores.forEach(doctor => {
         const option = document.createElement('option');
-        option.value = doctor.id_doctor;
+        option.value = doctor.id_medico;
         option.textContent = `Dr. ${doctor.nombre} ${doctor.apellido}`;
         selectDoctores.appendChild(option);
     });
 }
 
-// Función para enviar el formulario de nueva cita
+// Función para buscar al paciente por cédula
+async function buscarPacientePorCedula(cedula) {
+    const response = await apiRequest(`/pacientes/cedula/${cedula}`, 'GET');
+    if (response && !response.error) {
+        // Si el paciente es encontrado, rellena el formulario
+        document.getElementById('pacienteNombre').value = `${response.nombre} ${response.apellido}`;
+        document.getElementById('pacienteId').value = response.id_paciente;
+    } else {
+        alert("Paciente no encontrado.");
+    }
+}
+
+// Función para agendar una nueva cita
 async function nuevaCita(event) {
     event.preventDefault();
 
@@ -52,7 +65,7 @@ async function nuevaCita(event) {
 
     const response = await apiRequest('/citas', 'POST', { 
         id_paciente: pacienteId, 
-        id_doctor: doctorId, 
+        id_medico: doctorId, 
         fecha, 
         hora, 
         estado 
@@ -66,17 +79,6 @@ async function nuevaCita(event) {
     }
 }
 
-//  Ejecutar funciones al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Cargando lista de pacientes y doctores...");
-    cargarPacientes();
-    cargarDoctores();
-
-    const formCita = document.getElementById('formNuevaCita');
-    if (formCita) {
-        formCita.addEventListener('submit', nuevaCita);
-    }
-});
 // Función para mostrar pacientes
 async function mostrarPacientes() {
     try {
@@ -100,15 +102,49 @@ async function mostrarPacientes() {
                 <td>${paciente.apellido}</td>
                 <td>${paciente.telefono}</td>
                 <td>${paciente.direccion}</td>
+                <td>${paciente.nro_cedula}</td>
+                <td>${paciente.genero}</td>
+                <td>${paciente.peso ? paciente.peso : 'N/A'}</td>
+                <td>${paciente.altura ? paciente.altura : 'N/A'}</td>
+                <td>${new Date(paciente.fecha_nacimiento).toLocaleDateString()}</td>
             `;
             tablaPacientes.appendChild(row);
         });
 
         console.log("Pacientes mostrados en la tabla.");
     } catch (error) {
-        console.error(" Error al obtener pacientes:", error);
+        console.error("Error al obtener pacientes:", error);
     }
 }
+
+// Ejecutar funciones cuando cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM cargado, mostrando datos en tablas.");
+
+    // Verificar si los elementos existen antes de ejecutarlos
+    const formCita = document.getElementById('formNuevaCita');
+    if (formCita) {
+        formCita.addEventListener('submit', nuevaCita);
+    }
+
+    const cedulaInput = document.getElementById('cedulaPaciente');
+    if (cedulaInput) {
+        cedulaInput.addEventListener('input', (e) => {
+            const cedula = e.target.value;
+            if (cedula.length === 10) {
+                buscarPacientePorCedula(cedula);
+            }
+        });
+    }
+
+    // Llamar a cargar doctores y pacientes
+    cargarDoctores();
+    cargarPacientes();
+});
+
+console.log(" admin.js ha sido cargado correctamente.");
+
+
 
 // Función para mostrar citas en una tabla
 async function mostrarCitas() {
@@ -174,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Función para agregar un nuevo paciente
+// Función para agregar un nuevo paciente
 async function nuevoPaciente(event) {
     event.preventDefault();
     console.log("Formulario enviado");
@@ -182,14 +219,19 @@ async function nuevoPaciente(event) {
     const apellido = document.getElementById('apellido').value;
     const telefono = document.getElementById('telefono').value;
     const direccion = document.getElementById('direccion').value;
+    const nro_cedula = document.getElementById('nro_cedula').value;
+    const genero = document.getElementById('genero').value;
+    const peso = document.getElementById('peso').value;
+    const altura = document.getElementById('altura').value;
+    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
 
-    console.log("Datos capturados:", { nombre, apellido, telefono, direccion });
+    console.log("Datos capturados:", { nombre, apellido, telefono, direccion, nro_cedula, genero, peso, altura, fecha_nacimiento });
 
     try {
         const response = await fetch('http://localhost:5000/api/pacientes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, apellido, telefono, direccion })
+            body: JSON.stringify({ nombre, apellido, telefono, direccion, nro_cedula, genero, peso, altura, fecha_nacimiento })
         });
 
         console.log("Respuesta del servidor:", response);
@@ -211,6 +253,7 @@ async function nuevoPaciente(event) {
     }
 }
 
+
 // Función para agregar un nuevo doctor
 async function nuevoDoctor(event) {
     event.preventDefault();
@@ -219,14 +262,23 @@ async function nuevoDoctor(event) {
     const nombre = document.getElementById('nombreDoctor').value;
     const apellido = document.getElementById('apellidoDoctor').value;
     const telefono = document.getElementById('telefonoDoctor').value;
+    const especialidad = document.getElementById('especialidadDoctor').value;
+    const nro_cedula = document.getElementById('nroCedulaDoctor').value;
+    const nombre_usuario = document.getElementById('nombreUsuarioDoctor').value;
+    const contrasena = document.getElementById('contrasenaDoctor').value;
+    const rol = document.getElementById('rolDoctor').value;
 
-    console.log("Datos Capturados:", { nombre, apellido, telefono });
+    console.log("Datos Capturados:", { nombre, apellido, telefono, especialidad, nro_cedula, nombre_usuario, contrasena, rol });
 
     try {
+        // Enviar solicitud al backend para registrar el doctor y su usuario
         const response = await fetch('http://localhost:5000/api/doctores', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, apellido, telefono })
+            body: JSON.stringify({ 
+                nombre, apellido, telefono, especialidad, nro_cedula, 
+                nombre_usuario, contrasena, rol 
+            })
         });
 
         console.log("Respuesta del Servidor:", response);
@@ -246,6 +298,7 @@ async function nuevoDoctor(event) {
         alert("No se pudo registrar el doctor. Verifica la consola.");
     }
 }
+
 
 // Ejecutar funciones cuando cargue la página
 document.addEventListener('DOMContentLoaded', () => {
@@ -284,7 +337,7 @@ async function mostrarDoctores() {
         doctores.forEach(doctor => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${doctor.id_doctor}</td>
+                <td>${doctor.id_medico}</td>
                 <td>${doctor.nombre}</td>
                 <td>${doctor.apellido}</td>
                 <td>${doctor.telefono ? doctor.telefono : 'N/A'}</td>
@@ -292,7 +345,7 @@ async function mostrarDoctores() {
             tablaDoctores.appendChild(row);
         });
 
-        console.log("📢 Doctores mostrados en la tabla.");
+        console.log("Doctores mostrados en la tabla.");
     } catch (error) {
         console.error(" Error al obtener doctores:", error);
     }
@@ -307,46 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarDoctores();
     }
 });
-
-/*
-// Función para agendar una nueva cita
-async function nuevaCita(event) {
-    event.preventDefault();
-
-    const id_paciente = document.getElementById('pacienteId').value;
-    const id_doctor = document.getElementById('doctorId').value;
-    const fecha = document.getElementById('fecha').value;
-    const hora = document.getElementById('hora').value;
-    const estado = document.getElementById('estado').value;
-
-    // **Verifica los datos antes de enviarlos**
-    console.log("Datos capturados para nueva cita:", { id_paciente, id_doctor, fecha, hora, estado });
-
-    try {
-        const response = await fetch('http://localhost:5000/api/citas', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_paciente, id_doctor, fecha, hora, estado })
-        });
-
-        console.log("Respuesta del servidor:", response);
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Error al agendar cita");
-        }
-
-        const data = await response.json();
-        console.log("Cita agendada:", data);
-        alert("Cita agendada correctamente.");
-        mostrarCitas();
-
-    } catch (error) {
-        console.error("Error al agendar cita:", error.message);
-        alert("No se pudo agendar la cita. Verifica la consola.");
-    }
-}
-*/
 
 console.log("Script admin.js cargado");
 document.addEventListener('DOMContentLoaded', () => {
@@ -379,5 +392,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+//  Ejecutar funciones al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Cargando lista de pacientes y doctores...");
+    cargarPacientes();
+    cargarDoctores();
+
+    const formCita = document.getElementById('formNuevaCita');
+    if (formCita) {
+        formCita.addEventListener('submit', nuevaCita);
+    }
+});
 console.log(" admin.js ha sido cargado correctamente.");
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM completamente cargado");
+
+    const cedulaInput = document.getElementById('cedulaPaciente');
+    const formCita = document.getElementById('formNuevaCita');
+
+    // Verificar si los elementos existen
+    console.log("cedulaInput:", cedulaInput);
+    console.log("formCita:", formCita);
+
+    if (cedulaInput) {
+        cedulaInput.addEventListener('input', (e) => {
+            const cedula = e.target.value;
+            if (cedula.length === 10) {  // Aseguramos que se ingrese una cédula válida
+                buscarPacientePorCedula(cedula);
+            }
+        });
+    } else {
+        console.warn("El elemento 'cedulaPaciente' no se encuentra.");
+    }
+
+    if (formCita) {
+        formCita.addEventListener('submit', nuevaCita);
+    } else {
+        console.warn("El formulario 'formNuevaCita' no se encuentra.");
+    }
+});

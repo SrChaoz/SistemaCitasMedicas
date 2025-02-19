@@ -9,14 +9,15 @@ router.get("/", citaController.getCitas);
 router.post("/", citaController.createCita);
 
 // Actualizar una cita (cambiar estado)
-router.put("/:id", citaController.updateCita);
+router.put("/update/:id", citaController.updateCita);
 
 // Eliminar una cita
-router.delete("/:id", citaController.deleteCita);
+router.delete("/citas/:id", citaController.deleteCita);
 
-router.get("/doctor/:id_doctor", citaController.getCitasDoctor);
+router.get("/doctor/:id_medico", citaController.getCitasDoctor);
 
 // Marcar cita como completada
 router.put("/:id", citaController.completarCita);
+
 
 module.exports = router;

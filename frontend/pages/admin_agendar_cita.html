@@ -23,7 +23,6 @@
             <li><a href="admin_nuevo_doctor.html">Agregar Doctor</a></li>
             <li><a href="admin_agendar_cita.html" class="active">Agendar Cita</a></li>
             <li><a href="login.html">Cerrar Sesion</a></li>
-
         </ul>
     </nav>
 
@@ -32,28 +31,33 @@
         <p>Selecciona un paciente y un doctor para agendar la cita.</p>
 
         <form id="formNuevaCita">
+
+            <label for="cedulaPaciente">Cédula del Paciente:</label>
+            <input type="text" id="cedulaPaciente" placeholder="Ingrese la cédula" required>
+
+            <label for="pacienteId">ID del Paciente:</label>
+            <input type="text" id="pacienteId" readonly>
+
             <label for="pacienteId">Seleccionar Paciente:</label>
-            <select id="pacienteId" required>
-                <option value="">Cargando pacientes...</option>
-            </select>
-        
+            <input type="text" id="pacienteNombre" readonly>
+
             <label for="doctorId">Seleccionar Doctor:</label>
             <select id="doctorId" required>
                 <option value="">Cargando doctores...</option>
             </select>
-        
+
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" required>
-        
+
             <label for="hora">Hora:</label>
             <input type="time" id="hora" required>
-        
+
             <label for="estado">Estado:</label>
             <select id="estado" required>
                 <option value="Pendiente">Pendiente</option>
                 <option value="Completada">Completada</option>
             </select>
-        
+
             <button type="submit">Agendar Cita</button>
         </form>
     </div>

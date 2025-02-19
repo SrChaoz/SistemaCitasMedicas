@@ -28,7 +28,7 @@
 
     <div class="container">
         <h1>Registrar Nuevo Doctor</h1>
-        <p>Ingrese los datos del doctor para registrarlo en el sistema.</p>
+        <p>Ingrese los datos del doctor y su usuario para registrarlo en el sistema.</p>
 
         <form id="formNuevoDoctor">
             <label for="nombreDoctor">Nombre:</label>
@@ -38,7 +38,25 @@
             <input type="text" id="apellidoDoctor" required>
         
             <label for="telefonoDoctor">Teléfono:</label>
-            <input type="text" id="telefonoDoctor">
+            <input type="text" id="telefonoDoctor" required>
+        
+            <label for="especialidadDoctor">Especialidad:</label>
+            <input type="text" id="especialidadDoctor" required>
+
+            <label for="nroCedulaDoctor">Cédula:</label>
+            <input type="text" id="nroCedulaDoctor" required>
+
+            <label for="nombreUsuarioDoctor">Nombre de Usuario:</label>
+            <input type="text" id="nombreUsuarioDoctor" required>
+        
+            <label for="contrasenaDoctor">Contraseña:</label>
+            <input type="password" id="contrasenaDoctor" required>
+        
+            <label for="rolDoctor">Rol:</label>
+            <select id="rolDoctor">
+                <option value="medico">Médico</option>
+                <option value="administrativo">Administrativo</option>
+            </select>
         
             <button type="submit">Registrar Doctor</button>
         </form>
